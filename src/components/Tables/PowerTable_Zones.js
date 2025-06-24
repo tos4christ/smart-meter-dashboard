@@ -66,9 +66,9 @@ export class PowerDataTable extends Component {
                     <th className="px-4 py-3 text-center border-2 rounded">Zone</th>
                     <th className="px-4 py-3 text-center border-2 rounded">Trading Point</th>
                     <th className="px-4 py-3 text-center border-2 rounded">Name</th>
-                    <th className="px-4 py-3 text-center border-2 rounded">MW</th>
-                    <th className="px-4 py-3 text-center border-2 rounded">KV</th>
-                    <th className="px-4 py-3 text-center border-2 rounded">AMP</th>
+                    <th style={{color: "#FF6B6B"}} className="px-4 py-3 text-center border-2 rounded">MW</th>
+                    <th style={{color: "#FFD93D"}} className="px-4 py-3 text-center border-2 rounded">KV</th>
+                    <th style={{color: "#4ECDC4"}} className="px-4 py-3 text-center border-2 rounded">AMP</th>
                     <th className="px-4 py-3 text-center border-2 rounded">Status</th>
                     <th className="px-4 py-3 text-center border-2 rounded">Uptime</th>
                     </tr>
@@ -81,9 +81,9 @@ export class PowerDataTable extends Component {
                         <td className="px-1 py-2 text-center border-2 rounded">{r.zone}</td>
                         <td className="px-1 py-2 text-center border-2 rounded">{r.trading_point}</td>
                         <td className="px-1 py-2 text-center border-2 rounded">{r.name}</td>
-                        <td className="px-1 py-2 text-center border-2 rounded">{r.megawatts}</td>
-                        <td className="px-1 py-2 text-center border-2 rounded">{r.voltage}</td>
-                        <td className="px-1 py-2 text-center border-2 rounded">{r.amperes}</td>
+                        <td style={{color: "#FF6B6B"}} className="px-1 py-2 text-center border-2 rounded">{r.megawatts}</td>
+                        <td style={{color: "#FFD93D"}} className="px-1 py-2 text-center border-2 rounded">{r.voltage}</td>
+                        <td style={{color: "#4ECDC4"}} className="px-1 py-2 text-center border-2 rounded">{r.amperes}</td>
                         <td className="px-1 py-2 text-center border-2 rounded">{this.renderStatusBadge(r.feederStatus)}</td>
                         <td className="px-1 py-2 text-center border-2 rounded">{r.uptime}</td>
                     </tr>
