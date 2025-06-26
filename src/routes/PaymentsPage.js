@@ -11,7 +11,9 @@ class Payments extends Component {
       customers: [],
       filterMeterType: 'all',
       filterCustomer: 'all',
-      dateRange: '7'
+      dateRange: '7',
+      startDate: '',
+      endDate: ''
     };
   }
 
@@ -55,11 +57,26 @@ class Payments extends Component {
   };
 
   getFilteredPayments = () => {
-    const { payments, filterMeterType, filterCustomer } = this.state;
+    const { payments, filterMeterType, filterCustomer, startDate, endDate } = this.state;
     return payments.filter(payment => {
       const matchesMeterType = filterMeterType === 'all' || payment.objectData.meter_type === filterMeterType;
       const matchesCustomer = filterCustomer === 'all' || payment.objectData.customer_id === filterCustomer;
-      return matchesMeterType && matchesCustomer;
+      
+      let matchesDateRange = true;
+      if (startDate || endDate) {
+        const paymentDate = new Date(payment.objectData.payment_date);
+        if (startDate) {
+          const start = new Date(startDate);
+          matchesDateRange = matchesDateRange && paymentDate >= start;
+        }
+        if (endDate) {
+          const end = new Date(endDate);
+          end.setHours(23, 59, 59, 999); // Include end of day
+          matchesDateRange = matchesDateRange && paymentDate <= end;
+        }
+      }
+
+      return matchesMeterType && matchesCustomer && matchesDateRange;
     });
   };
 
@@ -86,7 +103,6 @@ class Payments extends Component {
                   <p className="text-sm text-green-600">All payments</p>
                 </div>
                 <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
-                  {/* <div className="icon-banknote text-xl text-green-600"></div> */}
                   <BanknotesIcon className="h-6 w-6 text-green-600" />
                 </div>
               </div>
@@ -100,7 +116,6 @@ class Payments extends Component {
                   <p className="text-sm text-blue-600">kWh</p>
                 </div>
                 <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
-                  {/* <div className="icon-zap text-xl text-blue-600"></div> */}
                   <BoltIcon className="h-6 w-6 text-yellow-500" />
                 </div>
               </div>
@@ -121,13 +136,14 @@ class Payments extends Component {
             </div>
           </div>
 
-          <div className="mb-6 flex space-x-4">
+          <div className="mb-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4
+">
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">Filter by Meter Type</label>
               <select 
                 value={filterMeterType}
                 onChange={(e) => this.setState({ filterMeterType: e.target.value })}
-                className="px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
               >
                 <option value="all">All Meter Types</option>
                 <option value="MD">MD Customers</option>
@@ -149,6 +165,24 @@ class Payments extends Component {
                   </option>
                 ))}
               </select>
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">Start Date</label>
+              <input
+                type="date"
+                value={this.state.startDate}
+                onChange={(e) => this.setState({ startDate: e.target.value })}
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">End Date</label>
+              <input
+                type="date"
+                value={this.state.endDate}
+                onChange={(e) => this.setState({ endDate: e.target.value })}
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+              />
             </div>
           </div>
 
