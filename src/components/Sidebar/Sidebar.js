@@ -66,15 +66,15 @@ class Sidebar extends React.Component {
                             this.setState({ activeItem: 'dashboard' }); 
                             this.navigateToZone('/dashboard')
                         }}
-                    />                
+                    />
                     <MenuItem 
                         icon="fa-bolt" 
                         label="Energy Zones"
-                        isActive={activeItem === 'zones'}
+                        isActive={activeItem === 'energy_zones'}
                         onClick={() => {
-                            onSelectZone('zones');
-                            // this.navigateToZone('zones');
-                            this.setState({ activeItem: 'zones' })
+                            onSelectZone('energy_zones');
+                            this.navigateToZone('energy_zones');
+                            this.setState({ activeItem: 'energy_zones' })
                         }}
                     >
                         {/* <MenuItem 
@@ -99,7 +99,7 @@ class Sidebar extends React.Component {
                         /> */}
                     </MenuItem>
                     <MenuItem 
-                        icon="fa-chart-pie" 
+                        icon="fa-clock" 
                         label="Availability"
                         isActive={activeItem === 'availability'}
                         onClick={() => {
@@ -160,10 +160,13 @@ class Sidebar extends React.Component {
                         /> */}
                     </MenuItem>
                     <MenuItem 
-                        icon="fa-chart-pie" 
+                        icon="fa-credit-card" 
                         label="Payments"
                         isActive={activeItem === 'payments'}
-                        onClick={() => this.setState({ activeItem: 'payments' })}
+                        onClick={() => {
+                            this.setState({ activeItem: 'payments' });
+                            this.navigateToZone('payments');
+                        }}
                     >
                         {/* <MenuItem 
                             icon="fa-circle" 
@@ -185,7 +188,7 @@ class Sidebar extends React.Component {
                         /> */}
                     </MenuItem>
                     <MenuItem 
-                        icon="fa-chart-pie" 
+                        icon="fa-battery-full" 
                         label="Energy Usage"
                         isActive={activeItem === 'consumption'}
                         onClick={() => this.setState({ activeItem: 'consumption' })}
@@ -210,10 +213,13 @@ class Sidebar extends React.Component {
                         /> */}
                     </MenuItem>
                     <MenuItem 
-                        icon="fa-chart-pie" 
+                        icon="fa-chart-line" 
                         label="Analytics"
                         isActive={activeItem === 'analytics'}
-                        onClick={() => this.setState({ activeItem: 'analytics' })}
+                        onClick={() => {
+                            this.setState({ activeItem: 'analytics' });
+                            this.navigateToZone('analytics')
+                        }}
                     />
                     <MenuItem 
                         icon="fa-bell" 

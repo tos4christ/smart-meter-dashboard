@@ -99,7 +99,6 @@ class AvailabilityChart extends Component {
             if (this.chartInstance) {
                 this.chartInstance.destroy();
             }
-
             const ctx = canvas.getContext('2d');
             if(!ctx) {  
                 console.error('Failed to acquire canvas context');

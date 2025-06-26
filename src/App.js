@@ -19,6 +19,10 @@ import AvailabilityOverview from './routes/AvailabilityOverview';
 import AvailabilityDetail from './routes/AvailabilityDetail';
 import DashboardZoneDetails from './routes/DashboardZoneDetails';
 import IndexPage from './routes/IndexPage';
+import PaymentsLayout from './routes/PaymentsLayout';
+import Payments from './routes/PaymentsPage';
+import Analytics from './routes/Analytics';
+import EnergyMetrics from './routes/Energy/EnergyLayout';
 import socket from './utils/socketIO';
 
 library.add(faCoffee, faUser);
@@ -26,6 +30,7 @@ library.add(faCoffee, faUser);
 class App extends React.Component {
   constructor(props) {
     super(props);
+    this.setSideBarWidth = this.setSideBarWidth.bind(this);
     this.state = {      
       serverData: null,
       error: null,  
@@ -84,7 +89,6 @@ class App extends React.Component {
   setSideBarWidth(width) {
       this.setState({side_bar_width: width});
   }
-
    reportError(err) {
     console.error('App error:', err);
   };
@@ -121,8 +125,18 @@ class App extends React.Component {
                   <Route index element={<AlertPanelDetails />} />
                 </Route>
                 {/* Payments Route */}
+                <Route path="payments" element={<PaymentsLayout />} >
+                  <Route index element={<Payments />} />
+                </Route>
                 {/* Analytics */}
-                {/* Settinngs */}
+                <Route path="analytics" element={<Analytics />} >
+                  {/* <Route index element={<Payments />} /> */}
+                </Route>
+                {/* Settings */}
+                {/* Energy Usage */}
+                <Route path="energy_zones" element={<EnergyMetrics />} >
+                  {/* <Route index element={<Payments />} /> */}
+                </Route>
               </Route>              
           </Routes>
          </div>
