@@ -145,4 +145,4 @@ export const getMockData = () => {
     };
 };
 
-export default { getMockData };
+// export default { getMockData };
